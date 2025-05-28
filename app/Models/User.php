@@ -2,56 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    protected $fillable = ['nama', 'alamat', 'no_hp', 'email', 'role', 'password'];
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role', // admin, dokter, pasien
-    ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed', // Laravel 10+ support
-    ];
-
-    // Relasi jika user adalah dokter
-    public function dokter()
+    public function periksaSebagaiAdmin(): HasMany
     {
-        return $this->hasOne(Dokter::class);
+        return $this->hasMany(Periksa::class, 'id_admin');
     }
 
-    // Relasi jika user adalah pasien
-    public function pasien()
+    public function periksaSebagaiPasien(): HasMany
     {
-        return $this->hasOne(Pasien::class);
+        return $this->hasMany(Periksa::class, 'id_pasien');
     }
 
-    // Helper role
-    public function isAdmin()
+    public function periksaSebagaiDokter(): HasMany
     {
-        return $this->role === 'admin';
-    }
-
-    public function isDokter()
-    {
-        return $this->role === 'dokter';
-    }
-
-    public function isPasien()
-    {
-        return $this->role === 'pasien';
+        return $this->hasMany(Periksa::class, 'id_dokter');
     }
 }
