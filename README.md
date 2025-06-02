@@ -1,61 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# KyuuMedica - Appointment System in Hospital
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+KyuuMedica adalah sistem informasi penjadwalan janji temu (appointment system) di lingkungan rumah sakit atau klinik berbasis web. Sistem ini dibangun menggunakan Laravel 12 dan AdminLTE, dengan tujuan untuk memudahkan pengelolaan jadwal periksa pasien, data dokter, poli, serta catatan pemeriksaan.
 
-## About Laravel
+## 📌 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 👤 Pasien
+- Pendaftaran sebagai pasien baru
+- Pendaftaran ke poli dengan memilih dokter dan melihat jadwal
+- Mendapatkan nomor rekam medis otomatis
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👨‍⚕️ Dokter
+- Mengelola data pribadi
+- Menentukan jadwal periksa
+- Melihat daftar pasien yang akan diperiksa
+- Memberikan catatan dan resep obat
+- Menghitung biaya pemeriksaan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👨‍💼 Admin
+- Manajemen data dokter, pasien, poli, dan obat
+- Dashboard statistik
 
-## Learning Laravel
+## ⚙️ Teknologi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Backend:** Laravel 12 (PHP)
+- **Frontend:** AdminLTE (HTML, Bootstrap, JS)
+- **Database:** MySQL
+- **Authentication:** Laravel Auth Scaffolding
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🧾 Database Schema
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **users:** menyimpan data user dan autentikasi
+- **pasien:** data pasien, termasuk no_rm otomatis
+- **poli:** daftar poli
+- **dokter:** data dokter dan relasi ke poli
+- **jadwal_periksa:** jadwal dokter
+- **daftar_poli:** pendaftaran pasien ke jadwal
+- **periksa:** data hasil periksa dan biaya
+- **obat:** daftar obat
+- **detail_periksa:** relasi obat dalam satu pemeriksaan
 
-## Laravel Sponsors
+## 🔐 Role & Akses
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Role   | Akses                                                                 |
+|--------|-----------------------------------------------------------------------|
+| Admin  | CRUD Data Dokter, Pasien, Poli, Obat. Lihat Dashboard                 |
+| Dokter | Lihat pasien, atur jadwal, input pemeriksaan dan catatan obat         |
+| Pasien | Daftar sebagai pasien baru, daftar ke poli sesuai jadwal dokter      |
 
-### Premium Partners
+## 🏁 Cara Menjalankan Proyek
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Clone repository
+```bash
+git clone https://github.com/username/kyuumedica.git
+cd kyuumedica
