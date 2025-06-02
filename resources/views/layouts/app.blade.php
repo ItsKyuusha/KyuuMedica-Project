@@ -34,15 +34,18 @@
       </li>
     </ul>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 d-flex align-items-center" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-user mr-2"></i>
-          <span>{{ Auth::user()->nama ?? 'Guest' }}</span>
-          <i class="fas fa-sign-out-alt ml-2"></i>
-        </button>
-      </li>
-    </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 d-flex align-items-center" data-toggle="modal" data-target="#logoutModal">
+        <i class="fas fa-user mr-2"></i>
+        <span>
+          {{ Auth::user()->nama ?? 'Guest' }} 
+          ({{ Auth::user()->role ?? 'No Role' }})
+        </span>
+        <i class="fas fa-sign-out-alt ml-2"></i>
+      </button>
+    </li>
+  </ul>
   </nav>
 
   <!-- Sidebar -->
@@ -55,45 +58,100 @@
     </a>
     <div class="sidebar">
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false" role="menu">
           {{-- Admin --}}
           @if(Auth::user() && Auth::user()->role === 'admin')
-            <li class="nav-item">
-              <a href="{{ route('dir_admin.dashboard') }}" class="nav-link {{ request()->routeIs('dir_admin.dashboard') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-home"></i>
-                <p>Dashboard Admin</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('dir_admin.dokter.index') }}" class="nav-link {{ request()->routeIs('dir_admin.dokter.index') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-user-md"></i>
-                <p>Manage Dokter</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('dir_admin.pasien.index') }}" class="nav-link {{ request()->routeIs('dir_admin.pasien.index') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-procedures"></i>
-                <p>Manage Pasien</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('dir_admin.poli.index') }}" class="nav-link {{ request()->routeIs('dir_admin.poli.index') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-clinic-medical"></i>
-                <p>Manage Poli</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('dir_admin.obat.index') }}" class="nav-link {{ request()->routeIs('dir_admin.obat.index') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-pills"></i>
-                <p>Manage Obat</p>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="{{ route('dashboard.dashboardAdmin') }}" class="nav-link {{ request()->routeIs('dashboard.dashboardAdmin') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-home"></i>
+              <p>Dashboard Admin</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview {{ request()->is('dokter*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('dokter*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>Manage Dokter<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview pl-4">
+              <li class="nav-item">
+                <a href="{{ route('dokter.index') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-user-md nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Read</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('dokter.create') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-user-md nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{ request()->is('pasien*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('pasien*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-procedures"></i>
+              <p>Manage Pasien<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview pl-4">
+              <li class="nav-item">
+                <a href="{{ route('pasien.index') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-procedures nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Read</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('pasien.create') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-procedures nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{ request()->is('poli*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('poli*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-clinic-medical"></i>
+              <p>Manage Poli<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview pl-4">
+              <li class="nav-item">
+                <a href="{{ route('poli.index') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-clinic-medical nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Read</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('poli.create') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-clinic-medical nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{ request()->is('obat*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('obat*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-pills"></i>
+              <p>Manage Obat<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview pl-4">
+              <li class="nav-item">
+                <a href="{{ route('obat.index') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-pills nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Read</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('obat.create') }}" class="nav-link" style="font-size:0.85rem; font-style:italic;">
+                  <i class="fas fa-pills nav-icon" style="font-size:0.75rem;"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           @endif
-
           {{-- Dokter --}}
           @if(Auth::user() && Auth::user()->role === 'dokter')
             <li class="nav-item">
-              <a href="{{ route('dir_dokter.dashboard') }}" class="nav-link {{ request()->routeIs('dir_dokter.dashboard') ? 'active' : '' }}">
+              <a href="{{ route('dashboard.dashboardDokter') }}" class="nav-link {{ request()->routeIs('dashboard.dashboardDokter') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>Dashboard Dokter</p>
               </a>
@@ -103,9 +161,21 @@
           {{-- Pasien --}}
           @if(Auth::user() && Auth::user()->role === 'pasien')
             <li class="nav-item">
-              <a href="{{ route('dir_pasien.dashboard') }}" class="nav-link {{ request()->routeIs('dir_pasien.dashboard') ? 'active' : '' }}">
+              <a href="{{ route('dashboard.dashboardPasien') }}" class="nav-link {{ request()->routeIs('dashboard.dashboardPasien') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>Dashboard Pasien</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('pasien.create') }}" class="nav-link {{ request()->routeIs('pasien.create') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-pills"></i>
+                <p>Pendaftaran as Pasien</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('daftarPoli.create') }}" class="nav-link {{ request()->routeIs('daftarPoli.index') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-pills"></i>
+                <p>Pendaftaran ke Poli</p>
               </a>
             </li>
           @endif

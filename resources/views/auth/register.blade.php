@@ -35,7 +35,13 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#" style="font-family: 'Great Vibes', cursive;"><b>KyuuMedica</a>
+    <a href="#">
+        <img src="{{ asset('AdminLTE/logo.png') }}" 
+            alt="Logo" 
+            class="brand-image" 
+            style="opacity: .9; width: 250px; height: auto;">
+      </a>
+    </a>
   </div>
 
   <div class="card">

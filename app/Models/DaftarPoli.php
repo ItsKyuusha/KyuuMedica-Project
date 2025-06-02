@@ -17,7 +17,7 @@ class DaftarPoli extends Model
         return $this->belongsTo(Pasien::class, 'id_pasien');
     }
 
-    public function jadwalPeriksa()
+    public function jadwal()
     {
         return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
     }

@@ -11,7 +11,7 @@ class DokterController extends Controller
     public function index() {
         $dokter = Dokter::with('poli')->get();
         $poli = Poli::all();
-        return view('dir_admin.dokter', [
+        return view('dokter.index', [
             'dokter' => $dokter,
             'poli' => $poli,
             'mode' => 'index',
@@ -21,7 +21,7 @@ class DokterController extends Controller
     public function create() {
         $dokter = Dokter::with('poli')->get();
         $poli = Poli::all();
-        return view('dir_admin.dokter.index', [
+        return view('dokter.create', [
             'dokter' => $dokter,
             'poli' => $poli,
             'mode' => 'create',
@@ -37,29 +37,23 @@ class DokterController extends Controller
         ]);
 
         Dokter::create($request->all());
-        return redirect()->route('dir_admin.dokter.index')->with('success', 'Dokter berhasil ditambahkan.');
+        return redirect()->route('dokter.create')->with('success', 'Dokter berhasil ditambahkan.');
     }
 
     public function edit($id) {
-        $dokter = Dokter::with('poli')->get();
-        $editDokter = Dokter::findOrFail($id);
+        $dokter = Dokter::with('poli')->findOrFail($id);  // ambil 1 dokter dengan relasi poli
         $poli = Poli::all();
-        return view('dir_admin.dokter.index', [
-            'dokter' => $dokter,
-            'editDokter' => $editDokter,
-            'poli' => $poli,
-            'mode' => 'edit',
-        ]);
+        return view('dokter.edit', compact('dokter', 'poli'));
     }
 
     public function update(Request $request, $id) {
         $dokter = Dokter::findOrFail($id);
         $dokter->update($request->all());
-        return redirect()->route('dir_admin.dokter.index')->with('success', 'Data dokter berhasil diperbarui.');
+        return redirect()->route('dokter.index')->with('success', 'Data dokter berhasil diperbarui.');
     }
 
     public function destroy($id) {
         Dokter::destroy($id);
-        return redirect()->route('dir_admin.dokter.index')->with('success', 'Dokter berhasil dihapus.');
+        return redirect()->route('dokter.index')->with('success', 'Dokter berhasil dihapus.');
     }
 }

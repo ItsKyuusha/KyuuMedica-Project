@@ -9,11 +9,11 @@ class PoliController extends Controller
 {
     public function index() {
         $poli = Poli::all();
-        return view('dir_admin.poli', compact('poli'));
+        return view('poli.index', compact('poli'));
     }
 
     public function create() {
-        return view('dir_admin.poli.create');
+        return view('poli.create');
     }
 
     public function store(Request $request) {
@@ -23,23 +23,23 @@ class PoliController extends Controller
         ]);
 
         Poli::create($request->all());
-        return redirect()->route('dir_admin.poli.index')->with('success', 'Poli berhasil ditambahkan.');
+        return redirect()->route('poli.create')->with('success', 'Poli berhasil ditambahkan.');
     }
 
     public function edit($id) {
         $poli = Poli::findOrFail($id);
-        return view('dir_admin.poli.edit', compact('poli'));
+        return view('poli.edit', compact('poli'));
     }
 
     public function update(Request $request, $id) {
         $poli = Poli::findOrFail($id);
         $poli->update($request->all());
-        return redirect()->route('dir_admin.poli.index')->with('success', 'Data poli berhasil diperbarui.');
+        return redirect()->route('poli.index')->with('success', 'Data poli berhasil diperbarui.');
     }
 
     public function destroy($id) {
         Poli::destroy($id);
-        return redirect()->route('dir_admin.poli.index')->with('success', 'Poli berhasil dihapus.');
+        return redirect()->route('poli.index')->with('success', 'Poli berhasil dihapus.');
     }
 }
 

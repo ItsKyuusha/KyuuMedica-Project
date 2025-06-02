@@ -36,8 +36,15 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#" style="font-family: 'Great Vibes', cursive;">KyuuMedica</a>
+    <a href="#">
+        <img src="{{ asset('AdminLTE/logo.png') }}" 
+            alt="Logo" 
+            class="brand-image" 
+            style="opacity: .9; width: 250px; height: auto;">
+      </a>
+    </a>
   </div>
+
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">

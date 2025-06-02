@@ -21,11 +21,11 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->route('dir_admin.dashboard');
+                return redirect()->route('dashboard.dashboardAdmin');
             } elseif ($user->role === 'dokter') {
-                return redirect()->route('dir_dokter.dashboard');
+                return redirect()->route('dashboard.dashboardDokter');
             }  elseif ($user->role === 'pasien') {
-                return redirect()->route('dir_pasien.dashboard');
+                return redirect()->route('dashboard.dashboardPasien');
             }
 
             // Default fallback

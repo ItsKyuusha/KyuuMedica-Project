@@ -8,7 +8,7 @@ use App\Models\Pasien;
 use App\Models\Poli;
 use App\Models\Obat;
 
-class DashboardController extends Controller
+class DashboardAdminController extends Controller
 {
     public function index()
     {
@@ -17,6 +17,6 @@ class DashboardController extends Controller
         $jumlahPoli = Poli::count();
         $jumlahObat = Obat::count();
 
-        return view('dir_admin.dashboard', compact('jumlahDokter', 'jumlahPasien', 'jumlahPoli', 'jumlahObat'));
+        return view('dashboard.dashboardAdmin', compact('jumlahDokter', 'jumlahPasien', 'jumlahPoli', 'jumlahObat'));
     }
 }

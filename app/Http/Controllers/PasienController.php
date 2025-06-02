@@ -9,11 +9,11 @@ class PasienController extends Controller
 {
     public function index() {
         $pasien = Pasien::all();
-        return view('dir_admin.pasien', compact('pasien'));
+        return view('pasien.index', compact('pasien'));
     }
 
     public function create() {
-        return view('dir_admin.pasien.create');
+        return view('pasien.create');
     }
 
     public function store(Request $request) {
@@ -35,23 +35,23 @@ class PasienController extends Controller
             'no_rm' => $no_rm,
         ]);
 
-        return redirect()->route('dir_admin.pasien.index')->with('success', 'Data pasien berhasil ditambahkan.');
+        return redirect()->route('pasien.index')->with('success', 'Data pasien berhasil ditambahkan.');
     }
 
     public function edit($id) {
         $pasien = Pasien::findOrFail($id);
-        return view('dir_admin.pasien.edit', compact('pasien'));
+        return view('pasien.edit', compact('pasien'));
     }
 
     public function update(Request $request, $id) {
         $pasien = Pasien::findOrFail($id);
         $pasien->update($request->all());
-        return redirect()->route('dir_admin.pasien.index')->with('success', 'Data pasien berhasil diperbarui.');
+        return redirect()->route('pasien.index')->with('success', 'Data pasien berhasil diperbarui.');
     }
 
     public function destroy($id) {
         Pasien::destroy($id);
-        return redirect()->route('dir_admin.pasien.index')->with('success', 'Data pasien berhasil dihapus.');
+        return redirect()->route('pasien.index')->with('success', 'Data pasien berhasil dihapus.');
     }
 }
 
