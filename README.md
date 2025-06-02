@@ -51,5 +51,5 @@ KyuuMedica adalah sistem informasi penjadwalan janji temu (appointment system) d
 
 1. Clone repository
 ```bash
-git clone https://github.com/username/kyuumedica.git
+git clone https://github.com/ItsKyuusha/KyuuMedica-Project.git
 cd kyuumedica
