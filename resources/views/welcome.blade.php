@@ -146,10 +146,10 @@
 
 
     <div class="hero-buttons">
-      <a href="" class="btn btn-primary btn-lg">
+      <a href="{{ route('login') }}" class="btn btn-primary btn-lg">
         <i class="fas fa-sign-in-alt me-1"></i> Login
       </a>
-      <a href="" class="btn btn-success btn-lg">
+      <a href="{{ route('register') }}" class="btn btn-success btn-lg">
         <i class="fas fa-user-plus me-1"></i> Daftar
       </a>
     </div>
